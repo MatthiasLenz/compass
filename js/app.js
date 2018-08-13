@@ -1,6 +1,12 @@
 (function () {
   "use strict";
-
+  
+  var len_degree_latitude = 111132;
+  var len_degree_longitude = 71225; //49 north
+	var width = 130;
+	var height = 130;
+	var target = {lat:49.832218, lon:6.097374};
+	target = {lat:49.755439, lon:6.110798};
   //set to true for debugging output
   var debug = false;
 
@@ -14,12 +20,15 @@
 
   // the outer part of the compass that rotates
   var rose = document.getElementById("rose");
+	var target_dot = document.getElementById("target_dot");
 
 
   // elements that ouput our position
   var positionLat = document.getElementById("position-lat");
   var positionLng = document.getElementById("position-lng");
   var positionHng = document.getElementById("position-hng");
+  var xCoord = document.getElementById("x-coord");
+  var yCoord = document.getElementById("y-coord");
 
 
   // debug outputs
@@ -305,8 +314,44 @@
 
     positionLat.textContent = decimalToSexagesimal(positionCurrent.lat, "lat");
     positionLng.textContent = decimalToSexagesimal(positionCurrent.lng, "lng");
+		let diff = diff_vector(positionCurrent.lat, positionCurrent.lng, target.lat, target.lon);
+		console.log(diff);
+		var screencoord = screen_coord(diff, 50);
+		target_dot.setAttribute("cx", screencoord.x);
+		target_dot.setAttribute("cy", screencoord.y);
   }
-
+	
+	function meters(diff){
+		return {lat:diff.lat*len_degree_latitude, lon: diff.lon*len_degree_longitude};
+	}
+	
+	function diff_vector(lat_position, lon_position, lat_target, lon_target){//Todo: use position object for target
+		var lat_vector = -(lat_position - lat_target);
+		var lon_vector = lon_position - lon_target;
+		return {lat:lat_vector, lon:lon_vector};
+	}
+	
+	function calculate_norm(diff_vector){
+		return Math.sqrt(diff_vector.lat*diff_vector.lat+diff_vector.lon*diff_vector.lon);
+	}
+	
+  function screen_coord(diff, radius){	
+	  diff = meters(diff);
+		console.log(diff);
+		var norm = calculate_norm(diff);
+		console.log(norm);
+		if (norm>radius){
+			//normalise diff vector and multiply by radius
+			diff.lat = diff.lat/norm*radius;
+			diff.lon = diff.lon/norm*radius
+		}
+    var ycoord = diff.lat/radius * (width/2) + (height/2)	//the compass circle does not stretch over the full length
+    var xcoord = diff.lon/radius * (width/2) + (width/2)
+		xCoord.textContent = xcoord;
+		yCoord.textContent = ycoord;
+		return {x:xcoord, y:ycoord};
+  }		
+	
   function locationUpdateFail(error) {
     positionLat.textContent = "n/a";
     positionLng.textContent = "n/a";
