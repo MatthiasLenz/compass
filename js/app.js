@@ -345,9 +345,9 @@
 		}
     var ycoord = diff.lat/radius * (width/2) + (height/2)	//the compass circle does not stretch over the full length
     var xcoord = diff.lon/radius * (width/2) + (width/2)
-		xCoord.textContent = xcoord;
-		yCoord.textContent = ycoord;
-		return {x:xcoord, y:ycoord};
+    //xCoord.textContent = xcoord;
+    //yCoord.textContent = ycoord;
+    return {x:xcoord, y:ycoord};
   }		
 	
   function locationUpdateFail(error) {
