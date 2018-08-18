@@ -314,7 +314,7 @@
     positionLng.textContent = decimalToSexagesimal(positionCurrent.lng, "lng");
 		let diff = diff_vector(positionCurrent.lat, positionCurrent.lng, target.lat, target.lon);
 		console.log(diff);
-		var screencoord = screen_coord(diff, 50);
+		var screencoord = screen_coord(diff, 100);
 		target_dot.setAttribute("cx", screencoord.x);
 		target_dot.setAttribute("cy", screencoord.y);
   }
@@ -324,8 +324,8 @@
 	}
 	
 	function diff_vector(lat_position, lon_position, lat_target, lon_target){//Todo: use position object for target
-		var lat_vector = -(lat_position - lat_target);
-		var lon_vector = lon_position - lon_target;
+		var lat_vector = -(lat_position - lat_target)*(-0.95);
+		var lon_vector = (lon_position - lon_target)*(-0.95);
 		return {lat:lat_vector, lon:lon_vector};
 	}
 	
