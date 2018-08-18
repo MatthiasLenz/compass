@@ -99,8 +99,8 @@
   }
 
 function setPoi() {
-    target.lat = document.getElementById("latinput").value;
-    target.lon = document.getElementById("loninput").value;
+    target.lat = document.getElementById("latinput").value/5;
+    target.lon = document.getElementById("loninput").value/5;
     
 }
   // browser agnostic orientation unlock
