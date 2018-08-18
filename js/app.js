@@ -1,10 +1,10 @@
-(function () {
-  "use strict";
+  var target = {lat: 49.978671, lon: 7.082699};
+  var lastPosition;
   var len_degree_latitude = 111132;
   var len_degree_longitude = 71225; //49 north
 	var width = 130;
 	var height = 130;
-	var target = {lat: 49.750971, lon: 6.640012};
+	//target = {lat: 49.750971, lon: 6.640012};
   //set to true for debugging output
   var debug = false;
 
@@ -61,7 +61,13 @@
   // the orientation of the device on app load
   var defaultOrientation;
 
-
+  function setPoi() {
+    target.lat = document.getElementById("latinput").value.replace(/,/g, '.')/200000;
+    target.lon = document.getElementById("loninput").value.replace(/,/g, '.')/200000;
+    console.log(target.lat);
+    console.log(target.lon);
+    locationUpdate(lastPosition)
+  }
   // browser agnostic orientation
   function getBrowserOrientation() {
     var orientation;
@@ -98,11 +104,7 @@
     return orientation;
   }
 
-function setPoi() {
-    target.lat = document.getElementById("latinput").value/5;
-    target.lon = document.getElementById("loninput").value/5;
-    
-}
+
   // browser agnostic orientation unlock
   function browserUnlockOrientation() {
     if (screen.orientation && screen.orientation.unlock) {
@@ -311,6 +313,7 @@ function setPoi() {
   }
 
   function locationUpdate(position) {
+    lastPosition = position;
     positionCurrent.lat = position.coords.latitude;
     positionCurrent.lng = position.coords.longitude;
 
@@ -468,4 +471,3 @@ function setPoi() {
   setNightmode(false);
   checkLockable();
 
-}());
