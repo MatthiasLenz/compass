@@ -1,0 +1,6 @@
+[
+    { "index": 1, "name": "Palastgarten", "lat": 49.751118, "lon": 6.642615, "active": true},
+    { "index": 2, "name": "Der Daddy",    "lat": 49.750142, "lon": 6.637416, "active": true},
+    { "index": 3, "name": "Chibi-ya",     "lat": 49.757546, "lon": 6.642780, "active": true},
+    { "index": 4, "name": "Cubiculum",    "lat": 49.754027, "lon": 6.640457, "active": false}
+]

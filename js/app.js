@@ -1,12 +1,10 @@
 (function () {
   "use strict";
-  
   var len_degree_latitude = 111132;
   var len_degree_longitude = 71225; //49 north
 	var width = 130;
 	var height = 130;
-	var target = {lat:49.832218, lon:6.097374};
-	target = {lat:49.755439, lon:6.110798};
+	var target = {lat: 49.750971, lon: 6.640012};
   //set to true for debugging output
   var debug = false;
 
