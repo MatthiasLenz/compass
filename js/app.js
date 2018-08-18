@@ -98,7 +98,11 @@
     return orientation;
   }
 
-
+function setPoi() {
+    target.lat = document.getElementById("latinput").value;
+    target.lon = document.getElementById("loninput").value;
+    
+}
   // browser agnostic orientation unlock
   function browserUnlockOrientation() {
     if (screen.orientation && screen.orientation.unlock) {
